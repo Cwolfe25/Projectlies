@@ -1,6 +1,7 @@
 import math 
 from polynomial import polynomial
 import matplotlib.pyplot as plt
+
 gravity = -9.8
 degree = input("what do you want the launch degree to be? ")
 launchv = input("what do you want the lauch velocity to be? ")
