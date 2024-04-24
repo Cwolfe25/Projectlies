@@ -3,7 +3,10 @@ from polynomial import polynomial
 import matplotlib.pyplot as plt
 gravity = -9.8
 degree = input("what do you want the launch degree to be? ")
-
+psivel = [.1805,7.795]
+psi = polynomial(psivel)
+degree = int(degree)
+degree = psi.plugin(degree)
 launchv = input("what do you want the lauch velocity to be? ")
 displacementy = 0 
 degree = float(degree)
@@ -20,11 +23,14 @@ xv = abs(xv)
 xv = xv * launchv
 print(xv)
 print(yv)
-equation = [-4.9, yv, 0]
+equation = [-5, yv, 0]
 eqx = [xv,0]
 flightx = polynomial(eqx)
 flight = polynomial(equation)
-time = yv / 4.9
+time = yv / 5
+#time = -1*yv+sqrt(yv**2-4*-4.9*deltay)
+#timet = -4.9*2
+#time = time / timet
 print(time)
 #time = math.sqrt(time)
 displacementx = xv * time
@@ -37,7 +43,7 @@ y = [flight.plugin(count)]
 while count <= time:
     count = count + plotint
         
-    x.append(flightx.plugin(count))
-    y.append(flight.plugin(count))
+    x.append(flightx.plugin(count)*1.09361)
+    y.append(flight.plugin(count)*1.09361)
 plt.plot(x, y)
 plt.show()
