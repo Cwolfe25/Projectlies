@@ -1,13 +1,16 @@
 import math 
 from polynomial import polynomial
 import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+fig, ax = plt.subplots()
 gravity = -9.8
 degree = input("what do you want the launch degree to be? ")
 psivel = [.1805,7.795]
+
+launchv = input("what do you want the PSI to be? ")
 psi = polynomial(psivel)
-degree = int(degree)
-degree = psi.plugin(degree)
-launchv = input("what do you want the lauch velocity to be? ")
+launchv = float(launchv)
+launchv= psi.plugin(launchv)
 displacementy = 0 
 degree = float(degree)
 launchv = float(launchv)
@@ -38,6 +41,9 @@ print(displacementx)
 count = 0
 
 plotint = .01
+x = count
+y = flight.plugin(count)
+"""
 x = [count]
 y = [flight.plugin(count)]
 while count <= time:
@@ -46,4 +52,19 @@ while count <= time:
     x.append(flightx.plugin(count)*1.09361)
     y.append(flight.plugin(count)*1.09361)
 plt.plot(x, y)
+
+"""
+data = [count,time]
+def animate(i):
+    ax.clear()
+    count = float(data[0])
+    print(count)
+    x = flightx.plugin(count)*1.09361
+    y = flight.plugin(count)*1.09361
+    ax.plot(x,y,'-ro')
+    count = count + plotint
+    data[0] = count
+    
+
+ani = animation.FuncAnimation(fig, animate, frames=60, interval=plotint)
 plt.show()
