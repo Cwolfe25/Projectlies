@@ -1,6 +1,7 @@
 import math 
 from polynomial import polynomial
 import matplotlib.pyplot as plt
+import matplotlib.animation as animation
 gravity = -9.8
 degree = input("what do you want the launch degree to be? ")
 psivel = [.1805,7.795]
