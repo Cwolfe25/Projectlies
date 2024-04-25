@@ -11,6 +11,7 @@ launchv = input("what do you want the PSI to be? ")
 psi = polynomial(psivel)
 launchv = float(launchv)
 launchv= psi.plugin(launchv)
+print(launchv)
 displacementy = 0 
 degree = float(degree)
 launchv = float(launchv)
@@ -54,17 +55,28 @@ while count <= time:
 plt.plot(x, y)
 
 """
+xdata = []
+ydata = []
 data = [count,time]
 def animate(i):
-    ax.clear()
+    #ax.clear()
     count = float(data[0])
-    print(count)
-    x = flightx.plugin(count)*1.09361
-    y = flight.plugin(count)*1.09361
-    ax.plot(x,y,'-ro')
+    if count <= time:
+        x = flightx.plugin(count)*1.09361
+        y = flight.plugin(count)*1.09361
+        ax.plot(x,y,'-ro')
+        xdata.append(x)
+        ydata.append(y)
+
+    else:
+        x = flightx.plugin(time)*1.09361
+        y = 0
+        ax.plot(x,y)
     count = count + plotint
     data[0] = count
-    
+    ax.set_xlim(-1, 100)                  #sets the veiwing window
+    ax.set_ylim(-1, 50)
+ax.plot(xdata,ydata)
 
 ani = animation.FuncAnimation(fig, animate, frames=60, interval=plotint)
 plt.show()
