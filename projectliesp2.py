@@ -2,13 +2,19 @@ import math
 from polynomial import polynomial
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
+
+degree = int(input("what do you want the launch degree to be? "))
+launch_point = int(input("what do you want the lauch position to be? "))
+launch_point = launch_point + 10
+
+
 gravity = -9.8
 degree = input("what do you want the launch degree to be? ")
 psivel = [.1805,7.795]
 psi = polynomial(psivel)
 degree = int(degree)
 degree = psi.plugin(degree)
-launchv = input("what do you want the lauch velocity to be? ")
+launchv = input("what do you want the lauch position to be? ")
 displacementy = 0 
 degree = float(degree)
 launchv = float(launchv)

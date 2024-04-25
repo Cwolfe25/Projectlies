@@ -37,11 +37,11 @@ time = yv / 5
 #time = time / timet
 print(time)
 #time = math.sqrt(time)
-displacementx = xv * time
+displacementx = xv * time*1.09361
 print(displacementx)
 count = 0
 
-plotint = .01
+plotint = .05
 x = count
 y = flight.plugin(count)
 """
