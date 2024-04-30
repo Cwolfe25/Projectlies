@@ -6,16 +6,31 @@ import matplotlib.animation as animation
 degree = int(input("what do you want the launch degree to be? "))
 launch_point = int(input("what do you want the lauch position to be? "))
 launch_point = launch_point + 10
+dy = 3.3333
+degree = degree * 3.141592653589793238
+degree = degree / 180
+time = 3
+vx = (launch_point/time)
 
+vy = (dy/time + 4.9*time)
 
+velo = (vx**2 + vy**2)**(1/2)
+
+psi = (velo - 7.795)/.1805
+
+print('PSI is: ', psi)
+
+fig, ax = plt.subplots()
 gravity = -9.8
 degree = input("what do you want the launch degree to be? ")
 psivel = [.1805,7.795]
+
+launchv = input("what do you want the PSI to be? ")
 psi = polynomial(psivel)
-degree = int(degree)
-degree = psi.plugin(degree)
-launchv = input("what do you want the lauch position to be? ")
-displacementy = 0 
+launchv = float(launchv)
+launchv= psi.plugin(launchv)
+print(launchv)
+displacementy = 3.3333 
 degree = float(degree)
 launchv = float(launchv)
 degree = degree * 3.141592653589793238
@@ -40,11 +55,14 @@ time = yv / 5
 #time = time / timet
 print(time)
 #time = math.sqrt(time)
-displacementx = xv * time
+displacementx = xv * time*1.09361
 print(displacementx)
 count = 0
 
-plotint = .01
+plotint = .05
+x = count
+y = flight.plugin(count)
+"""
 x = [count]
 y = [flight.plugin(count)]
 while count <= time:
@@ -53,4 +71,30 @@ while count <= time:
     x.append(flightx.plugin(count)*1.09361)
     y.append(flight.plugin(count)*1.09361)
 plt.plot(x, y)
+
+"""
+xdata = []
+ydata = []
+data = [count,time]
+def animate(i):
+    #ax.clear()
+    count = float(data[0])
+    if count <= time:
+        x = flightx.plugin(count)*1.09361
+        y = flight.plugin(count)*1.09361
+        ax.plot(x,y,'-ro')
+        xdata.append(x)
+        ydata.append(y)
+
+    else:
+        x = flightx.plugin(time)*1.09361
+        y = 0
+        ax.plot(x,y)
+    count = count + plotint
+    data[0] = count
+    ax.set_xlim(-1, 100)                  #sets the veiwing window
+    ax.set_ylim(-1, 50)
+ax.plot(xdata,ydata)
+
+ani = animation.FuncAnimation(fig, animate, frames=60, interval=plotint)
 plt.show()
