@@ -2,41 +2,20 @@ import math
 from polynomial import polynomial
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
-
-degree = int(input("what do you want the launch degree to be? "))
-launch_point = int(input("what do you want the lauch position to be? "))
-launch_point = launch_point + 10
-launch_point = launch_point * 0.9144
-print(launch_point)
-dy = 3.048
-degree = degree * 3.141592653589793238
-degree = degree / 180
-time = 3
-vx = (launch_point/time)
-print(vx)
-
-vy = (dy/time + 5*time)
-print(vy)
-
-velo = (vx**2 + vy**2)**(1/2)
-
-psi = (velo - 7.795)/.1805
-
-print('PSI is: ', psi)
-
-
-
 fig, ax = plt.subplots()
 gravity = -9.8
 degree = input("what do you want the launch degree to be? ")
 psivel = [.1805,7.795]
+deltax = input("distance from field goal")
+deltax = float(deltax)
+deltax = deltax / 1.09361
 
 launchv = input("what do you want the PSI to be? ")
 psi = polynomial(psivel)
 launchv = float(launchv)
 launchv= psi.plugin(launchv)
 print(launchv)
-displacementy = 3.048
+displacementy = 0 
 degree = float(degree)
 launchv = float(launchv)
 degree = degree * 3.141592653589793238
@@ -55,14 +34,17 @@ equation = [-5, yv, 0]
 eqx = [xv,0]
 flightx = polynomial(eqx)
 flight = polynomial(equation)
-time = yv / 5
+time = xv / deltax
 #time = -1*yv+sqrt(yv**2-4*-4.9*deltay)
 #timet = -4.9*2
 #time = time / timet
 print(time)
 #time = math.sqrt(time)
-displacementx = xv * time*1.09361
-print(displacementx)
+truefalse = flight.plugin(time)
+if truefalse > 3.1:
+    print("rocket should clear the field goal")
+else:
+    print("rocket fell short")
 count = 0
 
 plotint = .05
